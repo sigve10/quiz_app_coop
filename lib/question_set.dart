@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 import 'question.dart';
@@ -54,15 +53,6 @@ class QuestionSet {
     }
 
     return questions;
-  }
-
-  Widget render() {
-    return Column(
-      children: [
-        for (Question question in _questions)
-          question.render()
-      ]
-    );
   }
 
   List<Question> get questions => _questions;

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:quiz_app_coop/answer_set.dart';
+import 'package:quiz_app_coop/question.dart';
 import 'package:quiz_app_coop/question_set.dart';
 
 class Quiz {
@@ -52,6 +53,12 @@ class QuizState extends State<QuizWidget> {
     });
   }
 
+  void _setAnswer(int questionIndex, int answerIndex) {
+    setState(() {
+      widget.answerSet.setAnswer(questionIndex, answerIndex);
+    });
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
     body: Stepper(
@@ -60,10 +67,12 @@ class QuizState extends State<QuizWidget> {
       onStepContinue: _increaseStep,
       onStepTapped: _setStep,
       steps: [
-        for (var (index, question) in questions.indexed)
+        for (var (int index, Question question) in questions.indexed)
           Step(
             title: Text("Question $index"),
-            content: question.render()
+            content: question.render(
+              (answerIdx) => _setAnswer(index, answerIdx)
+            )
           )
       ]
     )
