@@ -1,0 +1,14 @@
+{
+	"questions": [
+		{
+			"text": "What is the biggest city in Australia?",
+			"options": [
+				"Sydney",
+				"New Wales",
+				"Your mom"
+			],
+			"correctIndex": 0,
+			"points": 10
+		}
+	]
+}
