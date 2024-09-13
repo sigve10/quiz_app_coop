@@ -36,21 +36,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late final QuestionSet questionSet;
-  late final AnswerSet answerSet;
   Quiz? quiz;
+  bool isLoading = false;
 
-  void onReady() {
-    setState(() {
-      quiz = quiz;
-    });
+  void lateLoader() {
+    QuestionSet.awaitCreateFromImport("assets/questions.json")
+      .then((questionSet) {
+        AnswerSet answerSet = AnswerSet(questionSet.questions.length);
+        setState(() {
+          quiz = Quiz(answerSet, questionSet);
+          isLoading = false;
+        });
+      });
   }
 
   @override
   void initState() {
-    questionSet = QuestionSet.import("assets/questions.json", onReady);
-    answerSet = AnswerSet(questionSet.questions.length);
-    quiz = Quiz(answerSet, questionSet);
+    lateLoader();
     super.initState();
   }
 
@@ -62,8 +64,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child:
-            quiz!.render()
+        child: () {
+          if (quiz != null) {
+            return quiz?.render();
+          }
+          return const Text("");
+        }()
       )
     );
   }
