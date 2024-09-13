@@ -4,21 +4,21 @@ import 'dart:convert';
 import 'question.dart';
 
 class QuestionSet {
-  late List<Question> questions;
+  late List<Question> _questions;
 
-  QuestionSet(this.questions);
+  QuestionSet(this._questions);
 
   QuestionSet.import(String pathName) {
-    questions = <Question>[];
+    _questions = <Question>[];
 
-    import(pathName).then(
+    _import(pathName).then(
       (data) {
-        questions = data;
+        _questions = data;
       }
     );
   }
 
-  Future<List<Question>> import(pathName) async {
+  Future<List<Question>> _import(pathName) async {
     List<Question> questions = <Question>[];
 
     String rawJson = await rootBundle.loadString(pathName);
@@ -42,7 +42,7 @@ class QuestionSet {
   Widget render() {
     return Column(
       children: [
-        for (Question question in questions)
+        for (Question question in _questions)
           question.render()
       ]
     );
