@@ -1,0 +1,71 @@
+import 'dart:math';
+
+import 'package:flutter/material.dart';
+import 'package:quiz_app_coop/answer_set.dart';
+import 'package:quiz_app_coop/question_set.dart';
+
+class Quiz {
+  final AnswerSet answerSet;
+  final QuestionSet questionSet;
+
+  Quiz(this.answerSet, this.questionSet);
+
+  render() => QuizWidget(questionSet, answerSet);
+}
+
+class QuizWidget extends StatefulWidget {
+  final QuestionSet questionSet;
+  final AnswerSet answerSet;
+
+  const QuizWidget(
+    this.questionSet,
+    this.answerSet,
+    {super.key}
+  );
+
+  @override
+  State<StatefulWidget> createState() => QuizState();
+}
+
+class QuizState extends State<QuizWidget> {
+  int questionIndex = 0;
+  get questions => widget.questionSet.questions;
+
+  void _decreaseStep() {
+    setState(() {
+      questionIndex = max(0, questionIndex - 1);
+    });
+  }
+
+  void _increaseStep() {
+    setState(() {
+      questionIndex = min(
+        questionIndex + 1,
+        questions.length - 1
+      );
+    });
+  }
+
+  void _setStep(index) {
+    setState(() {
+      questionIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    body: Stepper(
+      currentStep: questionIndex,
+      onStepCancel: _decreaseStep,
+      onStepContinue: _increaseStep,
+      onStepTapped: _setStep,
+      steps: [
+        for (var (index, question) in questions.indexed)
+          Step(
+            title: Text("Question $index"),
+            content: question.render()
+          )
+      ]
+    )
+  );
+}
