@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app_coop/Quiz.dart';
+import 'package:quiz_app_coop/answer_set.dart';
+import 'package:quiz_app_coop/question_set.dart';
 
 // Majority of this code was provided by Android Studio's default flutter project.
 
@@ -24,6 +27,8 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
+
+
   final String title;
 
   @override
@@ -31,6 +36,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late final QuestionSet questionSet;
+  late final AnswerSet answerSet;
+  late final Quiz quiz;
+
+  @override
+  void initState() {
+    questionSet = QuestionSet.import("assets/questions.json");
+    answerSet = AnswerSet(questionSet.questions.length);
+    quiz = Quiz(answerSet, questionSet);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,9 +55,11 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: const Center(
-        child: Column(
-        ),
+      body: Center(
+        child:
+            quiz.render()
+
+
       )
     );
   }

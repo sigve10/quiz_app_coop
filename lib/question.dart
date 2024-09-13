@@ -13,7 +13,33 @@ class Question {
       this.points
       );
 
-  Widget render(int selectedIdx, Function(int) onAnswerSelected) {
+  Widget render(Function(int) onAnswerSelected) {
+    return QuestionWidget(onAnswerSelected, this);
+  }
+}
+
+class QuestionWidget extends StatefulWidget {
+  final Question question;
+
+  final Function onAnswerSelected;
+
+  const QuestionWidget(
+      this.onAnswerSelected,
+      this.question,
+      { super.key }
+      );
+
+  @override
+  State<StatefulWidget> createState() => QuestionState();
+}
+
+class QuestionState extends State <QuestionWidget> {
+  int? selectedIdx;
+
+  String get questionText => "";
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.all(10),
@@ -27,19 +53,20 @@ class Question {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 20),
-          ...List<Widget>.generate(alternatives.length, (index) {
+          ...List<Widget>.generate(widget.question.alternatives.length, (index) {
             return RadioListTile<int>(
               title: Text(
-                alternatives[index],
+                widget.question.alternatives[index],
                 style: const TextStyle(fontSize: 18),
               ),
               value: index,
               groupValue: selectedIdx,
-              onChanged: (value) => onAnswerSelected(value!),
+              onChanged: (value) => widget.onAnswerSelected(value!),
             );
           }),
         ],
       ),
     );
   }
+
 }
