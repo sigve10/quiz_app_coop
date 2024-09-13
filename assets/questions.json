@@ -1,14 +1,34 @@
 {
-	"questions": [
-		{
-			"text": "What is the biggest city in Australia?",
-			"options": [
-				"Sydney",
-				"New Wales",
-				"Your mom"
-			],
-			"correctIndex": 0,
-			"points": 10
-		}
-	]
+  "questions": [
+    {
+      "text": "What is the capital of France?",
+      "options": ["Berlin", "Madrid", "Paris", "Rome"],
+      "correctIndex": 2,
+      "points": 10
+    },
+    {
+      "text": "Which planet is known as the Red Planet?",
+      "options": ["Earth", "Mars", "Jupiter", "Saturn"],
+      "correctIndex": 1,
+      "points": 10
+    },
+    {
+      "text": "Who wrote 'To Kill a Mockingbird'?",
+      "options": ["Harper Lee", "Mark Twain", "Ernest Hemingway", "F. Scott Fitzgerald"],
+      "correctIndex": 0,
+      "points": 10
+    },
+    {
+      "text": "What is the largest ocean on Earth?",
+      "options": ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+      "correctIndex": 3,
+      "points": 10
+    },
+    {
+      "text": "What is the chemical symbol for gold?",
+      "options": ["Au", "Ag", "Pb", "Fe"],
+      "correctIndex": 0,
+      "points": 10
+    }
+  ]
 }

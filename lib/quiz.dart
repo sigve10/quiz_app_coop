@@ -29,12 +29,12 @@ class QuizWidget extends StatefulWidget {
 }
 
 class QuizState extends State<QuizWidget> {
-  int questionIndex = 0;
-  get questions => widget.questionSet.questions;
+  int questionIndex = 1;
+  List<Question> get questions => widget.questionSet.questions;
 
   void _decreaseStep() {
     setState(() {
-      questionIndex = max(0, questionIndex - 1);
+      questionIndex = max(1, questionIndex - 1);
     });
   }
 
@@ -42,7 +42,7 @@ class QuizState extends State<QuizWidget> {
     setState(() {
       questionIndex = min(
         questionIndex + 1,
-        questions.length - 1
+        questions.length
       );
     });
   }
@@ -59,9 +59,9 @@ class QuizState extends State<QuizWidget> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) => Scaffold(
-    body: Stepper(
+  Widget _createStepper() {
+    questionIndex = 1;
+    return Stepper(
       currentStep: questionIndex,
       onStepCancel: _decreaseStep,
       onStepContinue: _increaseStep,
@@ -75,6 +75,16 @@ class QuizState extends State<QuizWidget> {
             )
           )
       ]
-    )
-  );
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(children: [
+        if (questions.isNotEmpty)
+          _createStepper()
+      ],)
+    );
+  }
 }

@@ -38,11 +38,17 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late final QuestionSet questionSet;
   late final AnswerSet answerSet;
-  late final Quiz quiz;
+  Quiz? quiz;
+
+  void onReady() {
+    setState(() {
+      quiz = quiz;
+    });
+  }
 
   @override
   void initState() {
-    questionSet = QuestionSet.import("assets/questions.json");
+    questionSet = QuestionSet.import("assets/questions.json", onReady);
     answerSet = AnswerSet(questionSet.questions.length);
     quiz = Quiz(answerSet, questionSet);
     super.initState();
@@ -57,9 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child:
-            quiz.render()
-
-
+            quiz!.render()
       )
     );
   }
