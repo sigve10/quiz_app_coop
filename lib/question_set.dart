@@ -64,4 +64,6 @@ class QuestionSet {
       ]
     );
   }
+
+  List<Question> get questions => _questions;
 }
