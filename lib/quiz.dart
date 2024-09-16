@@ -29,7 +29,7 @@ class QuizWidget extends StatefulWidget {
 }
 
 class QuizState extends State<QuizWidget> {
-  int questionIndex = 1;
+  int questionIndex = 0;
   List<Question> get questions => widget.questionSet.questions;
 
   void _decreaseStep() {
@@ -60,7 +60,6 @@ class QuizState extends State<QuizWidget> {
   }
 
   Widget _createStepper() {
-    questionIndex = 1;
     return Stepper(
       currentStep: questionIndex,
       onStepCancel: _decreaseStep,
