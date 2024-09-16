@@ -24,17 +24,12 @@ class QuestionSet {
   ///   ...
   /// ]
   /// ```
-  QuestionSet.import(String pathName) {
-    _questions = <Question>[];
-
-    _import(pathName).then(
-      (data) {
-        _questions = data;
-      }
-    );
+  static Future<QuestionSet> awaitCreateFromImport(String pathName) async {
+    List<Question> questions = await _import(pathName);
+    return QuestionSet(questions);
   }
 
-  Future<List<Question>> _import(pathName) async {
+  static Future<List<Question>> _import(pathName) async {
     List<Question> questions = <Question>[];
 
     String rawJson = await rootBundle.loadString(pathName);
