@@ -36,7 +36,7 @@ class QuestionWidget extends StatefulWidget {
 class QuestionState extends State <QuestionWidget> {
   int? selectedIdx;
 
-  String get questionText => "";
+  String get questionText => widget.question.questionText;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,12 @@ class QuestionState extends State <QuestionWidget> {
               ),
               value: index,
               groupValue: selectedIdx,
-              onChanged: (value) => widget.onAnswerSelected(value!),
+              onChanged: (value) {
+                setState(() {
+                  selectedIdx = value;
+                });
+                widget.onAnswerSelected(value!);
+              }
             );
           }),
         ],
