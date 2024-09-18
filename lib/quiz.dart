@@ -41,8 +41,8 @@ class QuizState extends State<QuizWidget> {
   void _increaseStep() {
     setState(() {
       questionIndex = min(
-        questionIndex + 1,
-        questions.length
+          questionIndex + 1,
+          questions.length - 1
       );
     });
   }
