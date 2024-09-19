@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:quiz_app_coop/answer_set.dart';
+import 'package:quiz_app_coop/main.dart';
 import 'package:quiz_app_coop/question.dart';
 import 'package:quiz_app_coop/question_set.dart';
 
@@ -31,10 +32,11 @@ class QuizWidget extends StatefulWidget {
 class QuizState extends State<QuizWidget> {
   int questionIndex = 0;
   List<Question> get questions => widget.questionSet.questions;
+  final ScrollController _scrollController = ScrollController();
 
   void _decreaseStep() {
     setState(() {
-      questionIndex = max(1, questionIndex - 1);
+      questionIndex = max(0, questionIndex - 1);
     });
   }
 
@@ -61,6 +63,7 @@ class QuizState extends State<QuizWidget> {
 
   Widget _createStepper() {
     return Stepper(
+      controller: _scrollController,
       currentStep: questionIndex,
       onStepCancel: _decreaseStep,
       onStepContinue: _increaseStep,
@@ -79,11 +82,11 @@ class QuizState extends State<QuizWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(children: [
-        if (questions.isNotEmpty)
-          _createStepper()
-      ],)
-    );
+    return () {
+      if (questions.isNotEmpty) {
+        return _createStepper();
+      }
+      return const Text("");
+    }();
   }
 }
