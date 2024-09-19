@@ -4,9 +4,7 @@ import 'package:quiz_app_coop/question_set.dart';
 
 /// handles the [questionSet] and [answerSet] and calculate the total points with [calcTotalPoints]
 class ResultManager {
-  ResultManager();
-
-  int calcTotalPoints(QuestionSet questionSet, AnswerSet answerSet) {
+  static int calcTotalPoints(QuestionSet questionSet, AnswerSet answerSet) {
     int totalPoints = 0;
 
     int length = questionSet.questions.length;
@@ -14,7 +12,6 @@ class ResultManager {
       Question question = questionSet.questions[index];
       int correctIndex = question.correctIndex;
       int selectedIndex = answerSet.answers[index];
-      print("Correct: $correctIndex, Selected:  $selectedIndex");
 
       if (correctIndex == selectedIndex) {
         totalPoints += question.points;

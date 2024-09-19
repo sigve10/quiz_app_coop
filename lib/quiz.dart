@@ -59,7 +59,7 @@ class QuizState extends State<QuizWidget> {
 
   /// Displays the result when [_showResult] is called.
   void _showResult() {
-    int totalPoints = ResultManager().calcTotalPoints(widget.questionSet, widget.answerSet);
+    int totalPoints = ResultManager.calcTotalPoints(widget.questionSet, widget.answerSet);
 
     Navigator.of(context).push(
       MaterialPageRoute(
