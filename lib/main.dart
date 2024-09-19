@@ -7,11 +7,12 @@ import 'package:quiz_app_coop/question_set.dart';
 // Majority of this code was provided by Android Studio's default flutter project.
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MainApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+/// The main widget of the application.
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,22 +22,23 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: "Quiz App: Assignment 1"),
+      home: const PageContainer(title: "Quiz App: Assignment 1"),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-
+/// The main material page container for the app
+class PageContainer extends StatefulWidget {
+  const PageContainer({super.key, required this.title});
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<PageContainer> createState() => _PageContainerState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+/// State of the page container. Responsible for loading questions from
+/// file before rendering anything.
+class _PageContainerState extends State<PageContainer> {
   Quiz? quiz;
   bool isLoading = false;
 

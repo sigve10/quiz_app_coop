@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Contains information about a question, and has the responsibility of rendering said question.
 class Question {
   final String questionText;
   final List<String> alternatives;
@@ -13,6 +14,8 @@ class Question {
       this.points
       );
 
+  /// Creates this function's widget. Takes a function [onAnswerSelected] which
+  /// should handle whenever a question has been selected.
   Widget render(Function(int) onAnswerSelected) {
     return QuestionWidget(onAnswerSelected, this);
   }

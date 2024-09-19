@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app_coop/Quiz.dart';
 
+/// A simple front page for the app. Contains a button to navigate to the actual quiz.
 class FrontPage extends StatelessWidget {
   const FrontPage(
     this.quiz,
