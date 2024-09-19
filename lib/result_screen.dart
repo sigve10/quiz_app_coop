@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Displays the result screen with [resultScore] and function [resetHandler]
 class ResultScreen extends StatelessWidget {
   final int resultScore;
   final VoidCallback resetHandler;
@@ -9,6 +10,7 @@ class ResultScreen extends StatelessWidget {
     required this.resetHandler,
   });
 
+  /// Builds the result screen up with [resultScore]
   @override
   Widget build(BuildContext context) {
     String resultText = "Your score is $resultScore";
