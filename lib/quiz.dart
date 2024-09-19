@@ -105,11 +105,17 @@ class QuizState extends State<QuizWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return () {
-      if (questions.isNotEmpty) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text("Quiz"),
+      ),
+      body: () {
+        if (questions.isEmpty) {
+          return const Text("Loading...");
+        }
         return _createStepper();
-      }
-      return const Text("");
-    }();
+      }()
+    );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app_coop/Quiz.dart';
 import 'package:quiz_app_coop/answer_set.dart';
+import 'package:quiz_app_coop/front_page.dart';
 import 'package:quiz_app_coop/question_set.dart';
 
 // Majority of this code was provided by Android Studio's default flutter project.
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: "Quiz App: Assignment 1"),
     );
   }
 }
@@ -66,9 +67,9 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: () {
           if (quiz != null) {
-            return quiz?.render();
+            return FrontPage(quiz!);
           }
-          return const Text("");
+          return const Text("Loading...");
         }()
       )
     );
