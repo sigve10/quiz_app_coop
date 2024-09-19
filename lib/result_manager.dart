@@ -13,6 +13,7 @@ class ResultManager {
       Question question = questionSet.questions[index];
       int correctIndex = question.correctIndex;
       int selectedIndex = answerSet.answers[index];
+      print("Correct: $correctIndex, Selected:  $selectedIndex");
 
       if (correctIndex == selectedIndex) {
         totalPoints += question.points;

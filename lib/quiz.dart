@@ -1,10 +1,10 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:quiz_app_coop/answer_set.dart';
-import 'package:quiz_app_coop/main.dart';
 import 'package:quiz_app_coop/question.dart';
 import 'package:quiz_app_coop/question_set.dart';
+import 'package:quiz_app_coop/result_manager.dart';
+import 'package:quiz_app_coop/result_screen.dart';
 
 class Quiz {
   final AnswerSet answerSet;
@@ -42,11 +42,34 @@ class QuizState extends State<QuizWidget> {
 
   void _increaseStep() {
     setState(() {
-      questionIndex = min(
-          questionIndex + 1,
-          questions.length - 1
-      );
+      if (questionIndex == questions.length - 1) {
+        _showResult();
+      } else {
+        questionIndex = min(questionIndex + 1, questions.length - 1);
+      }
     });
+  }
+
+  void _showResult() {
+    int totalPoints = ResultManager().calcTotalPoints(widget.questionSet, widget.answerSet);
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => ResultScreen(
+          resultScore: totalPoints,
+          resetHandler: _resetQuiz,
+        ),
+      ),
+    );
+  }
+
+  ///
+  void _resetQuiz() {
+    setState(() {
+      questionIndex = 0;
+      widget.answerSet.reset();
+    });
+    Navigator.of(context).pop();
   }
 
   void _setStep(index) {
