@@ -2,6 +2,7 @@ import 'package:quiz_app_coop/answer_set.dart';
 import 'package:quiz_app_coop/question.dart';
 import 'package:quiz_app_coop/question_set.dart';
 
+/// handles the [questionSet] and [answerSet] and calculate the total points with [calcTotalPoints]
 class ResultManager {
   ResultManager();
 
